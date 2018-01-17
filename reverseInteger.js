@@ -50,3 +50,8 @@ const reverse = (x) => {
   }
   return parseInt(reverse);
 };
+
+console.log(reverse(321));
+console.log(reverse(-543));
+console.log(reverse(-989));
+console.log(reverse(-1200));
