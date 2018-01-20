@@ -19,42 +19,48 @@ Your function should return length = 2, with the first two elements of nums bein
 
 const removeElement = (nums, val) => {
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === val) {
-      nums.splice(i, 1);
+    while (nums[i] === val) {
+      swap(nums, i, nums.length - 1);
+      nums.pop();
     }
   }
-  console.log(JSON.stringify(nums));
   return nums.length;
 };
 
-const nums = [3,2,2,3], val = 3;
+const swap = (array, i, j) => {
+  let temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+
+const nums = [3,2,3,2,3,3,4,3], val = 3;
 console.log(removeElement(nums, val));
 
 /* 
 
 SETUP
 
-Strategy: Iterate through array. If array[i] equals target, splice it. At end, return 
+Strategy: Iterate through array, while current val equals target, swap it with last element and remove last element from array.
 
-Big O: O(n^2) in worst case
-
-Input: const nums = [3,2,2,3], val = 3;
+Big O: O(n)
 Constraints: O(1) space complexity
+
+Input: const nums = [3,2,3,2,3,3,4,3], val = 3;
 
 Transformation: 
 
-[3,2,2,3] => [2,2,3]
-[2,2,3] // no change
-[2,2,3] // no change
-[2,2,3] => [2,2]
+i = 0: [3,2,3,2,3,3,4,3] => [3,2,3,2,3,3,4] => [4,2,3,2,3,3]
+i = 1: [4,2,3,2,3,3] // no change
+i = 2: [4,2,3,2,3,3] => [4,2,3,2,3] => [4,2,3,2] => [4,2,2,3] => [4,2,2]
 
-Output: length of current array ([2,2]) => 2
+Output: length of current array ([4,2,2]) => 3
 
 const removeElement = (nums, val) => {
   // for each nunmber...
-    // if number equals target
-      // splice current number from nums
-  // return nums length
+    // while number equals target
+      // swap current number with last element in nums
+      // remove last element from nums
+  // return length of nums
 };
 
 */
