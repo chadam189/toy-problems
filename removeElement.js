@@ -18,27 +18,43 @@ Your function should return length = 2, with the first two elements of nums bein
 */ 
 
 const removeElement = (nums, val) => {
-    
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === val) {
+      nums.splice(i, 1);
+    }
+  }
+  console.log(JSON.stringify(nums));
+  return nums.length;
 };
+
+const nums = [3,2,2,3], val = 3;
+console.log(removeElement(nums, val));
 
 /* 
 
 SETUP
 
-Strategy: 
+Strategy: Iterate through array. If array[i] equals target, splice it. At end, return 
 
-Big O:
+Big O: O(n^2) in worst case
 
-Input:
-Constraints:
-Edge Cases:
+Input: const nums = [3,2,2,3], val = 3;
+Constraints: O(1) space complexity
 
 Transformation: 
 
-Output: 
+[3,2,2,3] => [2,2,3]
+[2,2,3] // no change
+[2,2,3] // no change
+[2,2,3] => [2,2]
+
+Output: length of current array ([2,2]) => 2
 
 const removeElement = (nums, val) => {
-	
+  // for each nunmber...
+    // if number equals target
+      // splice current number from nums
+  // return nums length
 };
 
 */
