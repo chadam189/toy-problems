@@ -14,17 +14,10 @@ Minimize the total number of operations.
 */ 
 
 const moveZeroes = (nums) => {
+  let lowestZeroIndex = 0;
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === 0) {
-      let j = i + 1;
-      while (nums[j] === 0 && j !== nums.length) {
-        j++;
-      }
-      if (j === nums.length) {
-        break;
-      } else {
-        swap (nums, i, j); 
-      }
+    if (nums[i] !== 0) {
+      swap(nums, i, lowestZeroIndex++);
     }
   }
 };
@@ -43,7 +36,7 @@ console.log(`nums should equal [1, 3, 12, 0, 0]: ${JSON.stringify(nums)}`);
 
 SETUP
 
-Strategy: Iterate through array. If current val equals 0, swap it with next non-zero number. Return when there are no more non-zero numbers to swap with.
+Strategy: Iterate through array with two pointers. If current element equals 0, incrememt only the main pointer. Otherwise, swap the current element with the element at the other pointer, which will be pointing to the lowest-inedexed zero element...and then increment both pointers.
 
 Big O: O(n)
 Constraints: O(1) space complexity
@@ -52,20 +45,21 @@ Input: const nums = [0, 1, 0, 3, 12];
 
 Transformation: 
 
-i = 0: [0, 1, 0, 3, 12] => [1, 0, 0, 3, 12]
-i = 1: [1, 0, 0, 3, 12] => [1, 3, 0, 0, 12]
-i = 2: [1, 3, 0, 0, 12] => [1, 3, 12, 0, 0]
-i = 3: [1, 3, 12, 0, 0] => returns
+i = 0: [0, 1, 0, 3, 12] => lowestZeroIndex= 0
+i = 1: [0, 1, 0, 3, 12] => [1, 0, 0, 3, 12], lowestZeroIndex= 1
+i = 2: [1, 0, 0, 3, 12] // no change
+i = 3: [1, 0, 0, 3, 12] => [1, 3, 0, 0, 12], lowestZeroIndex = 2
+i = 3: [1, 3, 0, 0, 12] => returns
 
 Output: nums = [1, 3, 12, 0, 0];
 
 const moveZeroes = (nums) => {
+  let lowestZeroIndex = 0;
   // for each nunmber...
-    // if current number is 0
-      // find index of next non-zero number
-        // if next index is within array, swap those elements
-        // else, break (the rest of the array is 0's and we are finsihed)
-  // return nums
+    // if current number is not a zero
+      // swap current element with the earliest (lowest index) zero
+      // increment the lowest zero pointer
+
 };
 
 */
