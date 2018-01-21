@@ -50,7 +50,7 @@ const generateNextSequence = (prevSeq) => {
         consecutiveCharCount++;
       }
       nextSeq += consecutiveCharCount + currentChar;
-      i += consecutiveCharCount; 
+      i += consecutiveCharCount - 1; 
   }
   return nextSeq;
 };
@@ -97,7 +97,7 @@ const generateNextSequence = (prevSeq) => {
       // while char at (i + consecutiveCharCount) equals currentChar, increment consecutiveCharCount
         // when we find a different number or are at end of previous sequence
         // add the count then the currentChar to nextSequence
-        // increment i by consecutiveCharCount
+        // increment i by (consecutiveCharCount - 1)
   // return nextSeq
 };
 
