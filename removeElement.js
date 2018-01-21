@@ -40,7 +40,7 @@ console.log(removeElement(nums, val));
 
 SETUP
 
-Strategy: Iterate through array, while current val equals target, swap it with last element and remove last element from array.
+Strategy: Iterate through array. While current val equals target, swap it with last element and remove last element from array.
 
 Big O: O(n)
 Constraints: O(1) space complexity
