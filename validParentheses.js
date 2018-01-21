@@ -4,39 +4,39 @@
 
 const isValidParentheses = (string) => {
   // quick check if length is odd, if it is, string is invalid
-  if (string.length % 2 === 1 || string.length === 0) {
-    return false;
-  }
+  // if (string.length % 2 === 1 || string.length === 0) {
+  //   return false;
+  // }
   
   // create object with key/value pairs for the opening/closing brackets
-  const complements = {
+  const bracketMap = {
     "{": "}",
     "(": ")",
     "[": "]"
   };
   
-  // create array for tracking opening brackets
-  const openingChars = [];
+  // create stack for tracking opening brackets
+  const stack = [];
 
-  // for each char in string...
   for (let i = 0; i < string.length; i++) {
-    // if current char is opening bracket, put char into tracking array
-    if (string[i] === "(" || string[i] === "{" ||string[i] === "[") {
-      openingChars.push(string[i]);
+    // if current char is opening bracket, put it onto stack
+    if (bracketMap[string[i]]) {
+      stack.push(string[i]);
     } else {
     // else, compare char to the last item in the array 
-      if (string[i] !== complements[openingChars[openingChars.length - 1]]) {
+      if (string[i] !== bracketMap[stack[stack.length - 1]]) {
         // if they don't complement, return false...the string is not valid
         return false;
       } else {
         // if they do, delete last item in tracking array (pop)
-        openingChars.pop();
+        stack.pop();
       }
     }
   }
 
   // if we successfully make it through the loop, the string is valid
-  return true;
+  // check for edge cases in return
+  return string.length !== 0 && string.length % 2 === 1 && true;
 };
 
 let example = "({[({})]})";
@@ -63,9 +63,10 @@ Edge Cases: empty string?
 const isValidParentheses = (string) => {
   // quick check if length is odd, if it is, string is invalid
   
-  // create object with key/value pairs for the opening/closing brackets
+  // create map of brackets
   
-  // create array for tracking opening brackets
+  // create stack for tracking opening brackets
+
 
 
   // for each char in string...
