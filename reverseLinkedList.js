@@ -13,10 +13,13 @@ const reverseList = (list) => {
 	let result = null;
 
   while (current) {
-    let temp = current.next
-    current.next = result;
-    result = current;
-    current = temp;
+    let temp = {
+      val = current.val;
+      next = result;
+    };
+
+    result = temp;
+    current = current.next;
    }
 
 	return result;
