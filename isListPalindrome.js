@@ -1,3 +1,51 @@
+const isListPalindrome = (list) => {
+  const values = [];
+  let dummyHead = list;
+    while(dummyHead) {
+      values.push(dummyHead.val);
+      dummyHead = dummyHead.next;
+    }
+  
+  for (let start = 0, end = values.length - 1; start < end; start++, end--) {
+    if (values[start] !== values[end]) {
+      return false;
+    }
+  }
+  
+  return true;
+};
+
+const input1 = {
+  val: 0,
+  next: {
+    val: 1,
+    next: {
+      val: 0,
+      next: null
+    }
+  }
+};
+
+const input2 = {
+  val: 0,
+  next: {
+    val: 1,
+    next: {
+      val: 1,
+      next: {
+        val: 2,
+        next: null
+      }
+    }
+  }
+};
+
+const expected1 = true;
+const expected2 = false;
+
+console.log(`should return true for a legit palindrome: ${isListPalindrome(input1)}`);
+console.log(`should return false for something that is not a palindrome: ${isListPalindrome(input2)}`);
+
 /*
 
 Strategy:
