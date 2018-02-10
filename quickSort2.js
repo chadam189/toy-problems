@@ -1,30 +1,39 @@
 // Quick sort, using recursion, in O(1) space
 
-const recursiveQuickSort = (nums) => {
-	if (nums.length < 2) {
-		return nums;
-	}
+const recursiveQuickSort = (nums, low = 0, high = nums.length - 1) => {
+  if (low < high) {
 
-	let lesser = [];
-	let greater = [];
-	let pivot = nums[0];
+    let pivot = nums[low];
+    let store = low + 1;
+    let compare = low + 1;
 
-	for (let i = 1; i < nums.length; i++) {
-		// nums[i] < pivot ? lesser.push(nums[i]) : greater.push(nums[i]);
-		if (nums[i] < pivot) {
-			lesser.push(nums[i]);
-		} else {
-			greater.push(nums[i]);
-		}
-	}
+    for (store, compare; compare <= high; compare++) {
+      if (nums[compare] < pivot) {
+        swap(nums, store++, compare);
+      }
+    }
+    let partitionIndex = store - 1;
+    swap(nums, partitionIndex, low);
 
-	return recursiveQuickSort(lesser).concat(pivot, recursiveQuickSort(greater));
+    recursiveQuickSort(nums, low, partitionIndex - 1);
+    recursiveQuickSort(nums, partitionIndex + 1, high);
+  }
+
+  return nums;
+};
+
+const swap = (arr, i, j) => {
+	let temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
 };
 
 let input = [14, 4, 5, 63, 2, 15, 53, 12, 3, 43];
 let result = [2, 3, 4, 5, 12, 14, 15, 43, 53, 63];
 
 console.log(`it should return a sorted array: ${JSON.stringify(result) === JSON.stringify(recursiveQuickSort(input))}`);
+
+console.log(`results: ${JSON.stringify(recursiveQuickSort(input))}`);
 
 /* 
 
