@@ -1,15 +1,22 @@
 const recursiveQuickSort = (nums) => {
-	// if nums has zero or 1 element
-	  // return nums
+	if (nums.length < 2) {
+		return nums;
+	}
+
 	let lesser = [];
 	let greater = [];
 	let pivot = nums[0];
-	// for each number...
-	  // if number is less than pivot
-	    // push result onto lesser
-	  // else
-	    // push result onto greater
-	// return concated array of: quicksort(lesser), pivot, quicksort(greater)
+
+	for (let i = 1; i < nums.length; i++) {
+		// nums[i] < pivot ? lesser.push(nums[i]) : greater.push(nums[i]);
+		if (nums[i] < pivot) {
+			lesser.push(nums[i]);
+		} else {
+			greater.push(nums[i]);
+		}
+	}
+
+	return recursiveQuickSort(lesser).concat(pivot, recursiveQuickSort(greater));
 };
 
 let input = [2, 4, 5, 63, 14, 15, 53, 12, 3, 43];
