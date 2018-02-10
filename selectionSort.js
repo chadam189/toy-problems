@@ -1,4 +1,18 @@
+const selectionSort = (nums) => {
+  let n = nums.length - 1;
+	// while n > 0
+	  let max = 0;
+	  // for each num from index 1 to index n
+	    // if current number is larger than element at index max
+	      // update max with index of largest number
+	  // swap elements at index n and index max
+	// return nums
+};
 
+let nums = [4, 1, 8, 9, 2, 6, 3];
+let result = [1, 2, 3, 4, 6, 8, 9];
+
+console.log(`it should sort an array of integers: ${JSON.stringify(result) === JSON.stringify(selectionSort(nums))}`);
 
 
 /* 
@@ -24,7 +38,14 @@ stop when n = 0 => result is [1, 2, 3, 4, 6, 8, 9]
 Output: let result = [1, 2, 3, 4, 6, 8, 9];
 
 const selectionSort = (nums) => {
-	
+  let n = nums.length - 1;
+	// while n > 0
+	  let max = 0;
+	  // for each num from index 1 to index n
+	    // if current number is larger than element at index max
+	      // update max with index of largest number
+	  // swap elements at index n and index max
+	// return nums
 };
 
 
