@@ -1,12 +1,18 @@
 const selectionSort = (nums) => {
   let n = nums.length - 1;
-	// while n > 0
+	while (n > 0) {
 	  let max = 0;
-	  // for each num from index 1 to index n
-	    // if current number is larger than element at index max
-	      // update max with index of largest number
-	  // swap elements at index n and index max
-	// return nums
+	  for (let i = 1; i <= n; i++) {
+      max = (nums[i] > nums[max]) ? i : max;
+	  }
+	  if (max !== n) {
+	  	let temp = nums[max];
+	  	nums[max] = nums[n];
+	  	nums[n] = temp;
+	  }
+	  n--;
+	}
+	return nums;
 };
 
 let nums = [4, 1, 8, 9, 2, 6, 3];
