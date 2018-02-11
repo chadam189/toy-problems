@@ -1,5 +1,26 @@
+const mergeSort = (input) => {
+  if (input.length < 2) {
+    return input;
+  }
+  
+  let middle = input.length / 2;
+  let left = input.slice(0, middle);
+  let right = input.slice(middle, input.length);
 
+  return merge(mergeSort(left), mergeSort(right));
+};
 
+const merge = (left, right) => {
+  let results = [];
+  let leftPointer = 0;
+  let rightPointer = 0;
+  
+  while (leftPointer < left.length && rightPointer < right.length) {
+    left[leftPointer] <= right[rightPointer] ? results.push(left[leftPointer++]) : results.push(right[rightPointer++]);
+  }
+
+  return results.concat(left.slice(leftPointer), right.slice(rightPointer));
+};
 
 let input = [14, 4, 5, 63, 2, 15, 53, 12, 3, 43];
 let result = [2, 3, 4, 5, 12, 14, 15, 43, 53, 63];
@@ -64,7 +85,7 @@ const mergeSort = (input) => {
 	// find middle index (length / 2)
 	let middle = input.length / 2;
 	let left = [...input.slice(0, middle)];
-	let right = [...input.slice(middle, input.length - 1)];
+	let right = [...input.slice(middle, input.length)];
 
 	// sort both of these arrays, merge them, and return them
 };
