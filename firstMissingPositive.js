@@ -14,24 +14,43 @@ Your algorithm should run in O(n) time and uses constant space.
 
 */
 
-
-
 const firstMissingPositive = (nums) => {
-  // for each number...
-    // while current number is zero or negative
-      // swap with the last element and pop it 
-	// for each number...
-	  // if absolute value of current number is less than length of array
-	    // make the value at that index negative (if it's not already)
-	// for each number starting at index 1...
-	  // if current number is positive
-	    // return that index
-	// return length of array
-	return false;
+	// remove all zeroes and negative numbers from the array
+  for (let i = 0; i < nums.length; i++) {
+    while (i < nums.length && nums[i] < 1) {
+      swap(nums, i, nums.length - 1);
+      nums.pop();
+    }
+  }
+  
+	for (let i = 0; i < nums.length; i++) {
+		if (Math.abs(nums[i - 1]) < nums.length) {
+			nums[nums[i - 1]] = Math.abs(nums[nums[i - 1]]) * -1;
+		}
+	}
+	
+	for (let i = 0; i < nums.length; i++) {
+		if (nums[i] > 0) {
+      return i + 1;
+		}
+	}
+
+	return nums.length > 1 ? nums.length : 1;
 };
 
-const input = [3, 4, -1, 1];
-const result = 2;
+const swap = (array, i, j) => {
+	let temp = array[i];
+	array[i] = array[j];
+	array[j] = temp;
+};
+
+let input = [3, 4, -1, 1];
+let result = 2;
+
+console.log(`Input of ${JSON.stringify(input)} should find the first missing positive, which is ${result}: ${result === firstMissingPositive(input)}`);
+
+let input = [1, 2, 0];
+let result = 3;
 
 console.log(`Input of ${JSON.stringify(input)} should find the first missing positive, which is ${result}: ${result === firstMissingPositive(input)}`);
 
