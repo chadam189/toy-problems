@@ -14,6 +14,8 @@ SETUP:
 
 Strategy:
 
+For a triangle to be non-degenerate, it has to be A)
+
 Assume all three arrays will have the same length. Create a results array. Iterate through arrays, comparing the element at index 'i' in each of the three arrays to the others. By checking that each element is smaller than the sum of the other two elements, we can see if the three elements can form a non-degenerate triangle. (To clarify - we will perform three checks for every instance of i.) Assign either 'Yes' or 'No' to index i of the results array depending if the tests are passed.
 
 Big O: We loop through each array once, so linear time - O(n).
