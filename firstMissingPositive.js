@@ -16,6 +16,25 @@ Your algorithm should run in O(n) time and uses constant space.
 
 
 
+const firstMissingPositive = (nums) => {
+  // for each number...
+    // while current number is zero or negative
+      // swap with the last element and pop it 
+	// for each number...
+	  // if absolute value of current number is less than length of array
+	    // make the value at that index negative (if it's not already)
+	// for each number starting at index 1...
+	  // if current number is positive
+	    // return that index
+	// return length of array
+	return false;
+};
+
+const input = [3, 4, -1, 1];
+const result = 2;
+
+console.log(`Input of ${JSON.stringify(input)} should find the first missing positive, which is ${result}: ${result === firstMissingPositive(input)}`);
+
 /* 
 
 SETUP
