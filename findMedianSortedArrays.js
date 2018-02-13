@@ -22,31 +22,43 @@ The median is (2 + 3)/2 = 2.5
 */
 
 const findMedianSortedArrays = (nums1, nums2) => {
-  // merge two arrays into a new array
-  let results = [];
-  let p1 = 0;
-  let p2 = 0;
 
-  // while p1 and p2 are valid pointers
-    // add smaller of two values at p1 and p2 to results
-    // increment the pointer that was at the smaller value
+  let results = merge(nums1, nums2);
 
-  // add remainder of other array to results
-
-  // if results has an odd number of elements
-    // return value at index ((length + 1) / 2)
-  // else, return average of values at the two middle indices
-  	// index1 = (length + 1) / 2
-  	// index2 = (length - 1) / 2
-  	// return (value at index1 + value at index2) / 2
+  if (results.length % 2 === 1) {
+    return results[(results.length - 1) / 2];
+  } else {
+    let index1 = (results.length / 2) - 1;
+    let index2 = (results.length / 2);
+    return (results[index1] + results[index2]) / 2; 
+  }
 
 };
 
+const merge = (arr1, arr2) => {
+  let results = []; 
+  let p1 = 0;
+  let p2 = 0;
 
-const nums1 = [1, 5, 8], nums2 = [2, 6, 13, 13];
-const result = 6;
+  while (p1 < arr1.length && p2 < arr2.length) {
+    arr1[p1] <= arr2[p2] ? results.push(arr1[p1++]) : results.push(arr2[p2++]);
+  }
 
-console.log(`Input of ${JSON.stringify(nums1)} and ${JSON.stringify(nums2)} should find the median value, which is ${result}: ${result === findMedianSortedArrays(nums1, nums2)}`);
+  return results.concat(arr1.slice(p1), arr2.slice(p2));
+};
+
+
+let nums1 = [1, 5, 8]
+let nums2 = [2, 6, 13, 13];
+let result = 6;
+
+console.log(`Input of ${JSON.stringify(nums1)} and ${JSON.stringify(nums2)} should find the median value, which should be ${result} and comes out as: ${findMedianSortedArrays(nums1, nums2)}`);
+
+nums1 = [1, 5, 8]
+nums2 = [2, 6, 13, ];
+result = 5.5;
+
+console.log(`Input of ${JSON.stringify(nums1)} and ${JSON.stringify(nums2)} should find the median value, which should be ${result} and comes out as: ${findMedianSortedArrays(nums1, nums2)}`);
 
 /* 
 
@@ -56,7 +68,7 @@ Strategy:
 
 1) Merge two sorted arrays into new sorted array (similar to tactic used in merge sort). 
 
-	Use two pointers, one for each array, initialized to start at index 0. Compare values from the arrays at each pointer; add the smaller to the results array and increment that value's pointer. Continue until one pointer goes past the end of its array, then add the remainder of the other array to the results array.
+  Use two pointers, one for each array, initialized to start at index 0. Compare values from the arrays at each pointer; add the smaller to the results array and increment that value's pointer. Continue until one pointer goes past the end of its array, then add the remainder of the other array to the results array.
 
 2) Return median value (which is either a single value if the new array is odd, or the average of two values if the array is even).
 
@@ -83,9 +95,9 @@ const findMedianSortedArrays = (nums1, nums2) => {
   // if results has an odd number of elements
     // return value at index ((length + 1) / 2)
   // else, return average of values at the two middle indices
-  	// index1 = (length + 1) / 2
-  	// index2 = (length - 1) / 2
-  	// return (value at index1 + value at index2) / 2
+    // index1 = (length + 1) / 2
+    // index2 = (length - 1) / 2
+    // return (value at index1 + value at index2) / 2
 
 };
 
