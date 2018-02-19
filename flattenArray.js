@@ -4,12 +4,16 @@ Build function to flatten an array
 
 */
 
-const flatten = (arr) => {
+const flatten = (arr, shallow = false) => {
 	let results = [];
 
 	arr.forEach((elem) => {
 		if (Array.isArray(elem)) {
-			results = results.concat(flatten(elem));
+			if (shallow) {
+				elem.forEach(val => results.push(val));
+			} else {
+				results = results.concat(flatten(elem));
+			}
 		} else {
 			results.push(elem);
 		}
@@ -22,6 +26,11 @@ let input = [1, 2, [3, 4], 5, [6, [7, 8], 9], 10];
 let result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 console.log(`it should flatten nested arrays: ${JSON.stringify(flatten(input)) === JSON.stringify(result)}`);
+
+input = [1, 2, [3, 4], 5, [6, [7, 8], 9], 10];
+result = [1, 2, 3, 4, 5, 6, [7, 8], 9, 10];
+
+console.log(`it should flatten nested arrays one level if shallow option is used: ${JSON.stringify(flatten(input, true)) === JSON.stringify(result)}`);
 
 input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
