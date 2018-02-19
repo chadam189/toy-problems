@@ -22,6 +22,21 @@ let result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 console.log(`it should flatten nested arrays: ${JSON.stringify(flatten(input)) === JSON.stringify(result)}`);
 
+input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+console.log(`it should return identical array if input is flat: ${JSON.stringify(flatten(input)) === JSON.stringify(result)}`);
+
+input = [];
+result = [];
+
+console.log(`it should return empty array if input is empty: ${JSON.stringify(flatten(input)) === JSON.stringify(result)}`);
+
+input = [[[]]];
+result = [];
+
+console.log(`it should return empty flattened array if input is nested and empty: ${JSON.stringify(flatten(input)) === JSON.stringify(result)}`);
+
 
 /* 
 
