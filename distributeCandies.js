@@ -31,7 +31,18 @@ The number in given array is in range [-100,000, 100,000].
 
 */
 
+const distributeCandies = (candies) => {
+	let candyTypes = new Set();
 
+	candies.forEach(candy => candyTypes.add(candy));
+
+	return Math.min(candies.length / 2, candyTypes.size);
+};
+
+let input = [1,1,2,2,3,3];
+let result = 3;
+
+console.log(`it should return ${result} for input ${input}: ${distributeCandies(input) === result}`);
 
 
 
@@ -69,29 +80,13 @@ Output: let result = 3;
 
 
 const distributeCandies = (candies) => {
-	let candyTypes = new Map();
+	let candyTypes = new Set();
 
 	// for each candy
-	  // if the candy does not exist in map
-	     // add it to hash map as key with initial value of 1
-	  // else 
-	    // incrememnt its count by one
+	  // add candy to set
 
 	// return minimum value between (candies.length / 2) and candyTypes.size
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 */
 
