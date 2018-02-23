@@ -82,12 +82,55 @@ class Graph {
 
 			neighbors.forEach(node => this.dfsRecursive(node, cb, visited));
 		}
-
+    
 		// if root is not in visited
 		  // run root thru callback
 		  // add root to visited set
 		  // for each of root's neighbors
 		    // recursively call dfs
+
+  }
+
+  bfsIterative(start, cb = console.log) {
+    let queue = [];
+    let visited = new Set();
+    queue.push(start);
+
+
+    while(queue.length > 0) {
+
+      let currentNode = queue.shift();
+
+      if (!visited.has(currentNode)) {
+	      cb(currentNode);
+	      visited.add(currentNode);
+	      
+	      let neighbors = this.adjacencyList.get(currentNode);
+
+	      neighbors.forEach((node) => {
+	        if (!visited.has(node)) {
+	        	queue.push(node);
+	        }
+	      });
+      }
+
+    }
+
+    // init queue
+    // init visited as new Set
+
+    // add start to queue
+
+    // while (queue isn't empty)
+      // current node = front item in queue
+        // remove front item from queue 
+      // if (currentNode is not in visited)
+	      // run current node thru cb
+	      // add current node to visited
+      // for each neighbor of current node...
+        // if this neighbor has not been visited
+          // add this neighbor to end of queue
+
 
   }
 
@@ -111,20 +154,31 @@ g.addEdge('E', 'F');
 g.printGraph();
 
 
-var iAnswer = [];
-var rAnswer = [];
-
+let iAnswer = [];
+let rAnswer = [];
 
 let testFunc = (val) => iAnswer.push(val);
-
 g.dfsIterative('A', testFunc);
 
 console.log(`iterative DFS output: ${JSON.stringify(iAnswer)}`);
 
 testFunc = (val) => rAnswer.push(val);
-
 g.dfsRecursive('A', testFunc);
 
 console.log(`recursive DFS output: ${JSON.stringify(rAnswer)}`);
-
 console.log(`iteratve ${iAnswer.toString()} and recursive ${rAnswer.toString()} DFS results are identical: ${iAnswer.toString() === rAnswer.toString()}`);
+
+iAnswer = [];
+rAnswer = [];
+
+testFunc = (val) => iAnswer.push(val);
+// g.bfsIterative('A');
+g.bfsIterative('A', testFunc);
+
+console.log(`iterative BFS output: ${JSON.stringify(iAnswer)}`);
+
+// testFunc = (val) => rAnswer.push(val);
+// g.dfsRecursive('A', testFunc);
+
+// console.log(`recursive DFS output: ${JSON.stringify(rAnswer)}`);
+// console.log(`iteratve ${iAnswer.toString()} and recursive ${rAnswer.toString()} DFS results are identical: ${iAnswer.toString() === rAnswer.toString()}`);
