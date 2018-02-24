@@ -200,5 +200,86 @@ for (let person in network) {
   
 g2.printGraph();
 
+const shortestPath = (graph) => {
+
+
+};
+
+/* 
+
+SHORTEST PATH SETUP
+
+Strategy: 
+
+Perform BFS from each node, keeping track of visited nodes after each iteration as well as the path taken. If we have visited the same node in both searches, we have found a shortest path. Combine the two paths. Else, if we traverse entire graph from both nodes and don't find each other, then there is no path between the two.
+
+
+let input = node1, node2;
+
+let result = [node1, ..., node2];
+
+const shortestPath = (node1, node2) => {
+  
+  // init visited for both nodes
+  // init queues for both nodes
+  // init parent maps for both node paths
+
+  while (queues for both are not empty)
+
+    // node1 = pop q1
+    // add node1 children to node1 q
+    // add node1 children to node1 visited
+    // set node1 as parent of node1 children
+
+    // same for node2
+
+    // compare visited for eqaulity
+      // if so we found a match
+        // path 1 = trace back node1 lineage
+          // while parent != null
+            // add curr node to path 1
+        // repeat for path2
+        // combine path1.reverse and path2
+          // don't dupulicate middle element
+
+    // else 
+      // continue
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
