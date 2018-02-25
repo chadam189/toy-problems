@@ -190,20 +190,122 @@ const network = {
 };
 
 
-let g2 = new Graph(true);
+let g2 = new Graph();
 
 for (let person in network) {
   g2.addVertex(person);
-  network[person].forEach(friend => g2.addEdge(person, friend));
-  // console.log(network[person]);
+  network[person].forEach((friend) => {
+    g2.addVertex(friend);
+    if (g2.adjacencyList.get(person).indexOf(friend) < 0) {
+      g2.addEdge(person, friend)
+    } 
+  });
 }
   
 g2.printGraph();
 
-const shortestPath = (graph) => {
-
-
+const hasIntersection = (set1, set2) => {
+  for (let val of set1) {
+    if (set2.has(val)) {
+      return val;
+    }
+  }
+  return null;
 };
+
+// let setA = new Set([1, 2, 4]);
+// let setB = new Set([3, 4, 5]);
+// let setC = new Set([5, 4, 6, 7]);
+// let setD = new Set([8, 9]);
+
+// console.log(hasIntersection(setA, setB));
+// console.log(hasIntersection(setA, setC));
+// console.log(hasIntersection(setA, setD));
+// console.log(hasIntersection(setB, setC));
+
+const shortestPath = (graph, s, t) => {
+  let sVisited = new Set();
+  let tVisited = new Set();
+
+  let sQueue = [];
+  sQueue.push(s);
+  let tQueue = [];
+  tQueue.push(t);
+
+  let sParents = new Map().set(s, null);
+  let tParents = new Map().set(t, null);
+
+  while (sQueue.length && tQueue.length) {
+    
+    let sCurrent = sQueue.pop();
+    sVisited.add(sCurrent);
+    let sNeighbors = graph.adjacencyList.get(sCurrent);
+    sNeighbors.forEach((neighbor) => {
+      if (!sVisited.has(neighbor)) {
+        sQueue.unshift(neighbor);
+        sParents.set(neighbor, sCurrent);
+      }
+    });
+
+    let tCurrent = tQueue.pop();
+    tVisited.add(tCurrent);
+    let tNeighbors = graph.adjacencyList.get(tCurrent);
+    tNeighbors.forEach((neighbor) => {
+      if (!tVisited.has(neighbor)) {
+        tQueue.unshift(neighbor);
+        tParents.set(neighbor, tCurrent);
+      }
+    });
+
+    let intersectingNode = hasIntersection(sVisited, tVisited);
+
+    if (intersectingNode) {
+      let path1 = [];
+      let node1 = intersectingNode;
+      while (node1) {
+        path1.push(node1);
+        node1 = sParents.get(node1);
+      }
+
+      let path2 = [];
+      let node2 = intersectingNode;
+      while (node2) {
+        path2.push(node2);
+        node2 = tParents.get(node2);
+      }
+
+      path1.reverse();
+      path1.pop();
+
+      let finalPath = [...path1, ...path2];
+
+
+      return finalPath;
+    }
+  }
+
+  return null;
+};
+
+
+let memo = {};
+
+for (let start in network) {
+  for (let end in network) {
+    if (start !== end) {
+      let [name1, name2] = [start, end].sort();
+      let key = [name1, name2].join(' & ');
+      if (!memo[key]) {
+        let result = shortestPath(g2, name1, name2);
+        memo[key] = result;
+        console.log(`${key}: [${result.toString()}]`);
+      }
+    }
+  }
+}
+
+// console.log(shortestPath(g2, 'Jayden', 'Adam'));
+
 
 /* 
 
@@ -234,13 +336,16 @@ const shortestPath = (node1, node2) => {
     // same for node2
 
     // compare visited for eqaulity
-      // if so we found a match
-        // path 1 = trace back node1 lineage
-          // while parent != null
-            // add curr node to path 1
-        // repeat for path2
-        // combine path1.reverse and path2
-          // don't dupulicate middle element
+      // for each val in visit1
+        // check if in visit2
+
+    // if so we found a match
+      // path 1 = trace back node1 lineage
+        // while parent != null
+          // add curr node to path 1
+      // repeat for path2
+      // combine path1.reverse and path2
+        // don't dupulicate middle element
 
     // else 
       // continue
@@ -249,37 +354,6 @@ const shortestPath = (node1, node2) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
