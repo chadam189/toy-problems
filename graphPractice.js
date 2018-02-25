@@ -1,5 +1,3 @@
-
-
 class Graph {
   constructor (isDigraph = false) {
     this.verticesCount = 0;
@@ -43,7 +41,6 @@ class Graph {
   // remove edge
   // remove vertex
 
-  // print graph
   printGraph() {
     let keysList = [...this.adjacencyList.keys()];
 
@@ -91,48 +88,22 @@ class Graph {
   }
 
   dfsRecursive(root, cb = console.log, visited = new Set()) {
-    if (!visited.has(root)) {
-      cb(root);
-      visited.add(root);
-
-      let neighbors = this.adjacencyList.get(root);
-
-      neighbors.forEach(node => this.dfsRecursive(node, cb, visited));
-    }
-    
     // if root is not in visited
       // run root thru callback
       // add root to visited set
       // for each of root's neighbors
         // recursively call dfs
 
+    if (!visited.has(root)) {
+      cb(root);
+      visited.add(root);
+
+      let neighbors = this.adjacencyList.get(root);
+      neighbors.forEach(node => this.dfsRecursive(node, cb, visited));
+    }
   }
 
   bfsIterative(start, cb = console.log) {
-    let queue = [];
-    let visited = new Set();
-    queue.push(start);
-
-
-    while(queue.length > 0) {
-
-      let currentNode = queue.shift();
-
-      if (!visited.has(currentNode)) {
-        cb(currentNode);
-        visited.add(currentNode);
-        
-        let neighbors = this.adjacencyList.get(currentNode);
-
-        neighbors.forEach((node) => {
-          if (!visited.has(node)) {
-            queue.push(node);
-          }
-        });
-      }
-
-    }
-
     // init queue
     // init visited as new Set
 
@@ -148,51 +119,72 @@ class Graph {
         // if this neighbor has not been visited
           // add this neighbor to end of queue
 
+    let queue = [];
+    let visited = new Set();
 
+    queue.push(start);
+
+    while(queue.length > 0) {
+
+      let currentNode = queue.shift();
+
+      if (!visited.has(currentNode)) {
+        cb(currentNode);
+        visited.add(currentNode);
+        
+        let neighbors = this.adjacencyList.get(currentNode);
+        neighbors.forEach((node) => {
+          if (!visited.has(node)) {
+            queue.push(node);
+          }
+        });
+      }
+
+    }
   }
 
 }
 
-// let g = new Graph();
+let g = new Graph();
 
-// let vertices = ['A', 'B', 'C', 'D', 'E', 'F'];
+let vertices = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-// vertices.forEach(vertex => g.addVertex(vertex));
+vertices.forEach(vertex => g.addVertex(vertex));
 
-// g.addEdge('A', 'B');
-// g.addEdge('A', 'D');
-// g.addEdge('A', 'E');
-// g.addEdge('B', 'C');
-// g.addEdge('D', 'E');
-// g.addEdge('C', 'E');
-// g.addEdge('C', 'F');
-// g.addEdge('E', 'F');
+g.addEdge('A', 'B');
+g.addEdge('A', 'D');
+g.addEdge('A', 'E');
+g.addEdge('B', 'C');
+g.addEdge('D', 'E');
+g.addEdge('C', 'E');
+g.addEdge('C', 'F');
+g.addEdge('E', 'F');
 
-// g.printGraph();
+g.printGraph();
 
 
-// let iAnswer = [];
-// let rAnswer = [];
+let iAnswer = [];
+let rAnswer = [];
 
-// let testFunc = (val) => iAnswer.push(val);
-// g.dfsIterative('A', testFunc);
+let testFunc = (val) => iAnswer.push(val);
+g.dfsIterative('A', testFunc);
 
-// console.log(`iterative DFS output: ${JSON.stringify(iAnswer)}`);
+console.log(`iterative DFS output: ${JSON.stringify(iAnswer)}`);
 
-// testFunc = (val) => rAnswer.push(val);
-// g.dfsRecursive('A', testFunc);
+testFunc = (val) => rAnswer.push(val);
+g.dfsRecursive('A', testFunc);
 
-// console.log(`recursive DFS output: ${JSON.stringify(rAnswer)}`);
-// console.log(`iteratve ${iAnswer.toString()} and recursive ${rAnswer.toString()} DFS results are identical: ${iAnswer.toString() === rAnswer.toString()}`);
+console.log(`recursive DFS output: ${JSON.stringify(rAnswer)}`);
+console.log(`iteratve ${iAnswer.toString()} and recursive ${rAnswer.toString()} DFS results are identical: ${iAnswer.toString() === rAnswer.toString()}`);
 
-// iAnswer = [];
-// rAnswer = [];
+iAnswer = [];
+rAnswer = [];
 
-// testFunc = (val) => iAnswer.push(val);
+testFunc = (val) => iAnswer.push(val);
 
-// g.bfsIterative('A', testFunc);
+g.bfsIterative('A', testFunc);
 
-// console.log(`iterative BFS output: ${JSON.stringify(iAnswer)}`);
+console.log(`iterative BFS output: ${JSON.stringify(iAnswer)}`);
 
 
 const network = {
@@ -212,12 +204,7 @@ let g2 = new Graph();
 
 for (let person in network) {
   g2.addVertex(person);
-  network[person].forEach((friend) => {
-    g2.addVertex(friend);
-    // if (g2.adjacencyList.get(person).indexOf(friend) < 0) {
-      g2.addEdge(person, friend)
-    // } 
-  });
+  network[person].forEach((friend) => g2.addEdge(person, friend));
 }
   
 g2.printGraph();
