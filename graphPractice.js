@@ -22,6 +22,24 @@ class Graph {
     }
   }
 
+  addEdge(src, dest) {
+    let srcNeighbors = this.adjacencyList.get(src);
+
+    if (srcNeighbors.indexOf(dest) === -1) {
+      this.adjacencyList.get(src).push(dest);
+    }
+
+    this.addVertex(dest);
+
+    if (!this.isDigraph) {
+      let destNeighbors = this.adjacencyList.get(dest);
+
+      if (destNeighbors.indexOf(src) === -1) {
+        this.adjacencyList.get(dest).push(src);
+      }
+    }
+  }
+
   // remove edge
   // remove vertex
 
@@ -196,9 +214,9 @@ for (let person in network) {
   g2.addVertex(person);
   network[person].forEach((friend) => {
     g2.addVertex(friend);
-    if (g2.adjacencyList.get(person).indexOf(friend) < 0) {
+    // if (g2.adjacencyList.get(person).indexOf(friend) < 0) {
       g2.addEdge(person, friend)
-    } 
+    // } 
   });
 }
   
@@ -290,15 +308,17 @@ const shortestPath = (graph, s, t) => {
 
 let memo = {};
 
-for (let start in network) {
-  for (let end in network) {
+for (let start of g2.adjacencyList.keys()) {
+  for (let end of g2.adjacencyList.keys()) {
     if (start !== end) {
       let [name1, name2] = [start, end].sort();
       let key = [name1, name2].join(' & ');
       if (!memo[key]) {
-        let result = shortestPath(g2, name1, name2);
+        let result = shortestPath(g2, start, end);
         memo[key] = result;
-        console.log(`${key}: [${result.toString()}]`);
+        if (result) {
+          console.log(`${start} & ${end}: [${result.join(' => ')}]`);
+        }
       }
     }
   }
@@ -355,5 +375,22 @@ const shortestPath = (node1, node2) => {
 
 
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
