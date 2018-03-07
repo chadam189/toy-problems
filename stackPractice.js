@@ -107,6 +107,3 @@ console.log(`pop should remove and return top item off stack: ${stack.pop() === 
 console.log(`pop on stack with one element should remove and return top item off stack, and result in an empty stack: ${stack.pop() === 5 && stack.peek() === null && stack.isEmpty() === true && stack.size() === 0}`);
 
 console.log(`pop should return null when called after removing all items from a stack: ${stack.pop() === null}`);
-
-
-
