@@ -36,7 +36,59 @@ const QueueArray = function () {
   };
 };
 
-let queue = new QueueArray();
+const QueueList = function () {
+
+  let queue = {
+    head: null,
+    tail: null,
+    size: 0
+  }
+
+  this.enqueue = (val) => {
+    let node = {
+      val,
+      next: null
+    };
+    if (this.isEmpty()) {
+      queue.head = node;
+    } else {
+      queue.tail.next = node;
+    }
+    queue.tail = node;
+    queue.size++;
+  };
+
+  this.dequeue = () => {
+    if (this.isEmpty()) {
+      return null;
+    } else {
+      let firstVal = queue.head.val;
+      queue.head = queue.head.next;
+      queue.size--;
+      if (this.isEmpty()) {
+        queue.tail = null;
+      }
+      return firstVal;
+    }
+  };
+
+  this.peek = () => {
+    return queue.head ? queue.head.val : null;
+  };
+
+  this.isEmpty = () => {
+    return (queue.size === 0);
+  };
+
+  this.size = () => {
+    return queue.size;
+  };
+
+}
+
+
+// let queue = new QueueArray();
+let queue = new QueueList();
 
 console.log(`isEmpty should return true if no items are on queue: ${queue.isEmpty()}`);
 console.log(`size should return 0 for empty queue: ${queue.size() === 0}`);
